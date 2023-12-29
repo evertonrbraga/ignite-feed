@@ -2,16 +2,18 @@ import { render } from "@testing-library/react";
 import { Sidebar } from "../components/Sidebar";
 
 describe("<Sidebar />", () => {
-  it("should verify if the wrapper is rendering correctly", () => {
+  it("should verify if the .sidebar wrapper is rendering correctly", () => {
     render(<Sidebar />);
-    const asideElement = document.querySelector(".sidebar");
-    expect(asideElement).toBeInTheDocument();
+    const sidebarWrapper = document.querySelector(".sidebar");
+    expect(sidebarWrapper).toBeInTheDocument();
   });
 
-  it("should verify if the image is rendering correctly", () => {
+  it("should verify if the images are rendering correctly", () => {
     render(<Sidebar />);
-    const divElement = document.querySelector(".profile");
-    expect(divElement).toBeInTheDocument();
+    const coverImage = document.querySelector(".cover");
+    const avatarImage = document.querySelector(".avatar");
+    expect(coverImage).toBeInTheDocument();
+    expect(avatarImage).toBeInTheDocument();
   });
 
   it("should display the right texts on profile", () => {
@@ -21,10 +23,12 @@ describe("<Sidebar />", () => {
   });
 
   it("should verify if the footer and its contents is rendering correctly", () => {
-    const { container, getByText } = render(<Sidebar />);
+    const { container, getByText, getByLabelText } = render(<Sidebar />);
     const footerElement = container.querySelector("footer");
-    const linkElement = getByText("Editar seu perfil");
+    const icon = getByLabelText("icone-lapis");
+    const button = getByText("Editar seu perfil");
     expect(footerElement).toBeInTheDocument();
-    expect(linkElement).toBeInTheDocument();
+    expect(icon).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
   });
 });
