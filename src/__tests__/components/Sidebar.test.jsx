@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Sidebar } from "../components/Sidebar";
+import { Sidebar } from "../../components/Sidebar";
 
 describe("<Sidebar />", () => {
   it("should verify if the .sidebar wrapper is rendering correctly", () => {

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { Post } from "../components/Post";
+import { Post } from "../../components/Post";
 
 beforeEach(() => {
   render(<Post />);

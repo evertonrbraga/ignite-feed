@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Post.module.css";
+import { Comment } from "./Comment";
 
 export function Post() {
   const [buttonVisibility, setButtonVisibility] = useState(false);
@@ -52,6 +53,12 @@ export function Post() {
           {buttonVisibility ? <button type="submit">Publicar</button> : null}
         </footer>
       </form>
+
+      <div className={styles.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </article>
   );
 }
