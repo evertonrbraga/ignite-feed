@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Sidebar } from "../../components/Sidebar";
 
 describe("<Sidebar />", () => {
@@ -11,7 +11,9 @@ describe("<Sidebar />", () => {
   it("should verify if the images are rendering correctly", () => {
     render(<Sidebar />);
     const coverImage = document.querySelector(".cover");
-    const avatarImage = document.querySelector(".avatar");
+    const avatarImage = screen.getByAltText(
+      "Everton Braga's photo profile in the sidebar"
+    );
     expect(coverImage).toBeInTheDocument();
     expect(avatarImage).toBeInTheDocument();
   });

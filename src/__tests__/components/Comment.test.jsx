@@ -7,8 +7,10 @@ beforeEach(() => {
 
 describe("<Comment />", () => {
   it("should check if the image renders correctly", () => {
-    const img = screen.getByAltText("Foto avatar");
-    const url = "https://avatars.githubusercontent.com/u/25904662?v=4";
+    const img = screen.getByAltText(
+      "Everton Braga's photo profile in the comment"
+    );
+    const url = "https://www.github.com/evertonrbraga.png";
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute("src", url);
   });

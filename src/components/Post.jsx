@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Post.module.css";
 import { Comment } from "./Comment";
+import { Avatar } from "./Avatar";
 
 export function Post() {
   const [buttonVisibility, setButtonVisibility] = useState(false);
@@ -9,11 +10,12 @@ export function Post() {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img
-            className={styles.avatar}
-            src="https://avatars.githubusercontent.com/u/25904662?v=4"
-            alt="imagem-avatar"
+          <Avatar
+            src="https://www.github.com/evertonrbraga.png"
+            alt="Everton Braga's photo profile in the post"
+            hasBorder
           />
+
           <div className={styles.authorInfo}>
             <strong>Everton Braga</strong>
             <span>Web Developer</span>

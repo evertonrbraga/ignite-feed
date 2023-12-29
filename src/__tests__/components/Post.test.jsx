@@ -11,7 +11,9 @@ describe("<Post />", () => {
     expect(postWrapper).toBeInTheDocument();
   });
   it("should verify if the avatar image is rendering", () => {
-    const avatarImg = screen.getByAltText("imagem-avatar");
+    const avatarImg = screen.getByAltText(
+      "Everton Braga's photo profile in the post"
+    );
     expect(avatarImg).toBeInTheDocument();
   });
   it("should verify the authorInfo section", () => {
