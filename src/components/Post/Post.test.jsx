@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Post } from "./Post";
@@ -50,14 +50,22 @@ describe("<Post />", () => {
     expect(role).toBeInTheDocument();
   });
   it("should verify the post time", () => {
-    const formattedDate = format(
+    const publishedDateFormatted = format(
       data.publishedAt,
       "d 'de' MMMM 'às' HH:mm'h'",
       {
         locale: ptBR,
       }
     );
-    expect(formattedDate).toBe("29 de dezembro às 20:00h");
+    const publishedDateRelativeToNow = formatDistanceToNow(data.publishedAt, {
+      locale: ptBR,
+      addSuffix: true,
+    });
+    const timeTag = screen.getByTitle(publishedDateFormatted);
+    const dateTime = data.publishedAt.toISOString();
+    expect(timeTag).toHaveAttribute("title", publishedDateFormatted);
+    expect(timeTag).toHaveAttribute("dateTime", dateTime);
+    expect(timeTag).toHaveTextContent(publishedDateRelativeToNow);
   });
   it("should verify the post content", () => {
     const firstParagraph = screen.getByText("Fala galeraa 👋");
