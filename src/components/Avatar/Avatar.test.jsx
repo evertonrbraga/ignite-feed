@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Avatar } from "../../components/Avatar";
+import { Avatar } from "./Avatar";
 
 const data = {
   src: "https://www.github.com/evertonrbraga.png",

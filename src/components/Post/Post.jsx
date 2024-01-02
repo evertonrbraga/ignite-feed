@@ -1,40 +1,53 @@
+import { format, formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 import { useState } from "react";
+import { Comment } from "../Comment/Comment";
+import { Avatar } from "../Avatar/Avatar";
 import styles from "./Post.module.css";
-import { Comment } from "./Comment";
-import { Avatar } from "./Avatar";
 
-export function Post() {
+export function Post({ author, content, publishedAt }) {
   const [buttonVisibility, setButtonVisibility] = useState(false);
+
+  const publishedDateFormatted = format(
+    publishedAt,
+    "d 'de' MMMM 'às' HH:mm'h'",
+    { locale: ptBR }
+  );
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
 
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
           <Avatar
-            src="https://www.github.com/evertonrbraga.png"
+            src={author.avatarUrl}
             alt="Everton Braga's photo profile in the post"
             hasBorder
           />
 
           <div className={styles.authorInfo}>
-            <strong>Everton Braga</strong>
-            <span>Web Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
-        <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:30">
-          Publicado há 1h
+        <time
+          title={publishedDateFormatted}
+          dateTime={publishedAt.toISOString()}
+        >
+          {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={styles.content}>
-        <p>Fala galeraa 👋</p>
+        <p>{content[0].content}</p>
+        <p>{content[1].content}</p>
         <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </p>
-        <p>
-          <a href="#">jane.design/doctorcare</a>
+          <a href="#">{content[2].content}</a>
         </p>
         <p>
           <a href="#">#novoprojeto</a> <a href="#">#nlw</a>{" "}

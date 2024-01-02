@@ -7,7 +7,12 @@ module.exports = {
   },
   collectCoverage: true,
   coverageDirectory: "coverage",
-  collectCoverageFrom: ["src/**/*.js", "src/**/*.jsx"],
+  collectCoverageFrom: [
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "!src/**/*.stories.{js,jsx,ts,tsx}",
+    "!src/stories/*.{js,jsx,ts,tsx}",
+  ],
   coverageReporters: ["lcov", "text", "html"],
   coveragePathIgnorePatterns: ["/node_modules/", "src/main.jsx"],
 };

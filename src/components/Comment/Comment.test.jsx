@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Comment } from "../../components/Comment";
+import { Comment } from "./Comment";
 
 beforeEach(() => {
   render(<Comment />);

@@ -1,8 +1,35 @@
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { Post } from "../../components/Post";
+import { Post } from "./Post";
+
+const data = {
+  id: 1,
+  author: {
+    avatarUrl: "https://www.github.com/evertonrbraga.png",
+    name: "Everton Braga",
+    role: "Frontend Developer",
+  },
+  content: [
+    { type: "paragraph", content: "Fala galeraa 👋" },
+    {
+      type: "paragraph",
+      content:
+        "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
+    },
+    { type: "link", content: "jane.design/doctorcare" },
+  ],
+  publishedAt: new Date("2023-12-29 20:00:00"),
+};
 
 beforeEach(() => {
-  render(<Post />);
+  render(
+    <Post
+      author={data.author}
+      content={data.content}
+      publishedAt={data.publishedAt}
+    />
+  );
 });
 
 describe("<Post />", () => {
@@ -18,13 +45,19 @@ describe("<Post />", () => {
   });
   it("should verify the authorInfo section", () => {
     const author = screen.getByText("Everton Braga");
-    const role = screen.getByText("Web Developer");
+    const role = screen.getByText("Frontend Developer");
     expect(author).toBeInTheDocument();
     expect(role).toBeInTheDocument();
   });
   it("should verify the post time", () => {
-    const postTime = screen.getByText("Publicado há 1h");
-    expect(postTime).toBeInTheDocument();
+    const formattedDate = format(
+      data.publishedAt,
+      "d 'de' MMMM 'às' HH:mm'h'",
+      {
+        locale: ptBR,
+      }
+    );
+    expect(formattedDate).toBe("29 de dezembro às 20:00h");
   });
   it("should verify the post content", () => {
     const firstParagraph = screen.getByText("Fala galeraa 👋");
