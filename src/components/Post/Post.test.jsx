@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Post } from "./Post";
 
 const data = {
@@ -72,32 +72,36 @@ describe("<Post />", () => {
     const secondParagraph = screen.getByText(
       "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀"
     );
-    const thirdParagraph = screen.getByText(/jane.design\/doctorcare/i);
-    const fourthParagraphFirstAnchor = screen.getByText("#novoprojeto");
-    const fourthParagraphSecondAnchor = screen.getByText("#nlw");
-    const fourthParagraphThirdAnchor = screen.getByText("#rocketseat");
+    const linkText = /jane.design\/doctorcare/i;
+    const linkElement = screen.getByRole("link", { name: linkText });
     expect(firstParagraph).toBeInTheDocument();
     expect(secondParagraph).toBeInTheDocument();
-    expect(thirdParagraph).toBeInTheDocument();
-    expect(fourthParagraphFirstAnchor).toBeInTheDocument();
-    expect(fourthParagraphSecondAnchor).toBeInTheDocument();
-    expect(fourthParagraphThirdAnchor).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute("href", "#");
+    expect(linkElement).toHaveTextContent(linkText);
   });
-  it("should verify the commentForm section", () => {
+  it("should verify the commentForm section", async () => {
     const label = screen.getByText("Deixe seu feedback");
     expect(label).toBeInTheDocument();
 
+    const footerButtonSection = screen.getByLabelText("botao-publicar");
+    expect(footerButtonSection).toBeEmptyDOMElement();
+
     const textarea = screen.getByPlaceholderText("Deixe um comentário");
+    fireEvent.focus(textarea);
     expect(textarea).toHaveValue("");
     fireEvent.change(textarea, { target: { value: "Some text" } });
     expect(textarea).toHaveValue("Some text");
+    expect(footerButtonSection).not.toBeEmptyDOMElement();
 
-    const buttonBeforeFocus = screen.queryByText("Publicar");
-    expect(buttonBeforeFocus).toBeNull();
-    fireEvent.focus(textarea);
-    const buttonAfterFocus = screen.getByText("Publicar");
-    expect(buttonAfterFocus).toBeInTheDocument();
     fireEvent.blur(textarea);
-    expect(buttonBeforeFocus).toBeNull();
+
+    await waitFor(
+      () => {
+        expect(footerButtonSection).toBeEmptyDOMElement();
+      },
+      { timeout: 150 }
+    );
   });
 });
+
+//testar funcao de submit do form

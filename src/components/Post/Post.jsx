@@ -5,6 +5,8 @@ import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
 import styles from "./Post.module.css";
 
+const comments = [1, 2, 3];
+
 export function Post({ author, content, publishedAt }) {
   const [buttonVisibility, setButtonVisibility] = useState(false);
 
@@ -18,6 +20,16 @@ export function Post({ author, content, publishedAt }) {
     locale: ptBR,
     addSuffix: true,
   });
+
+  const handleCreateNewComment = () => {
+    console.log("oi");
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      setButtonVisibility(false);
+    }, 100);
+  };
 
   return (
     <article className={styles.post}>
@@ -44,23 +56,23 @@ export function Post({ author, content, publishedAt }) {
       </header>
 
       <div className={styles.content}>
-        <p>{content[0].content}</p>
-        <p>{content[1].content}</p>
-        <p>
-          <a href="#">{content[2].content}</a>
-        </p>
-        <p>
-          <a href="#">#novoprojeto</a> <a href="#">#nlw</a>{" "}
-          <a href="#">#rocketseat</a>
-        </p>
+        {content.map((line, index) => (
+          <p key={`content-${index}`}>
+            {line.type === "paragraph" ? (
+              line.content
+            ) : (
+              <a href="#">{line.content}</a>
+            )}
+          </p>
+        ))}
       </div>
 
-      <form className={styles.commentForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
 
         <textarea
           onFocus={() => setButtonVisibility(true)}
-          onBlur={() => setButtonVisibility(false)}
+          onBlur={handleBlur}
           placeholder="Deixe um comentário"
         />
 
@@ -70,9 +82,9 @@ export function Post({ author, content, publishedAt }) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map((comment) => (
+          <Comment />
+        ))}
       </div>
     </article>
   );

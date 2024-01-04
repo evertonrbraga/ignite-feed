@@ -127,7 +127,7 @@ describe("<App />", () => {
                   datetime="2023-12-29T23:00:00.000Z"
                   title="29 de dezembro às 20:00h"
                 >
-                  há 4 dias
+                  há 6 dias
                 </time>
               </header>
               <div
@@ -144,25 +144,6 @@ describe("<App />", () => {
                     href="#"
                   >
                     jane.design/doctorcare
-                  </a>
-                </p>
-                <p>
-                  <a
-                    href="#"
-                  >
-                    #novoprojeto
-                  </a>
-                   
-                  <a
-                    href="#"
-                  >
-                    #nlw
-                  </a>
-                   
-                  <a
-                    href="#"
-                  >
-                    #rocketseat
                   </a>
                 </p>
               </div>
@@ -622,7 +603,7 @@ describe("<App />", () => {
                   datetime="2023-12-31T23:00:00.000Z"
                   title="31 de dezembro às 20:00h"
                 >
-                  há 1 dia
+                  há 4 dias
                 </time>
               </header>
               <div
@@ -639,25 +620,6 @@ describe("<App />", () => {
                     href="#"
                   >
                     jane.design/doctorcare
-                  </a>
-                </p>
-                <p>
-                  <a
-                    href="#"
-                  >
-                    #novoprojeto
-                  </a>
-                   
-                  <a
-                    href="#"
-                  >
-                    #nlw
-                  </a>
-                   
-                  <a
-                    href="#"
-                  >
-                    #rocketseat
                   </a>
                 </p>
               </div>
