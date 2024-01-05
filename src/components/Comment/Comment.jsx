@@ -4,7 +4,7 @@ import { Avatar } from "../Avatar/Avatar";
 
 export function Comment() {
   return (
-    <div className={styles.comment}>
+    <div className={styles.comment} aria-label="comment">
       <Avatar
         src="https://www.github.com/evertonrbraga.png"
         alt="Everton Braga's photo profile in the comment"

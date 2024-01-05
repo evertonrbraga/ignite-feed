@@ -79,7 +79,7 @@ describe("<Post />", () => {
     expect(linkElement).toHaveAttribute("href", "#");
     expect(linkElement).toHaveTextContent(linkText);
   });
-  it("should verify the commentForm section", async () => {
+  it("should verify the commentForm section with the logic of button visibility", async () => {
     const label = screen.getByText("Deixe seu feedback");
     expect(label).toBeInTheDocument();
 
@@ -101,6 +101,20 @@ describe("<Post />", () => {
       },
       { timeout: 150 }
     );
+  });
+  it("should verify the form submit", () => {
+    const textarea = screen.getByPlaceholderText("Deixe um comentário");
+    const comments = screen.getAllByLabelText("comment");
+
+    expect(comments).toHaveLength(2);
+
+    fireEvent.focus(textarea);
+    const button = screen.getByText("Publicar");
+    fireEvent.change(textarea, { target: { value: "New comment" } });
+    fireEvent.click(button);
+
+    const updatedComments = screen.getAllByLabelText("comment");
+    expect(updatedComments).toHaveLength(3);
   });
 });
 

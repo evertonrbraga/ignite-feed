@@ -5,10 +5,9 @@ import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
 import styles from "./Post.module.css";
 
-const comments = [1, 2, 3];
-
 export function Post({ author, content, publishedAt }) {
   const [buttonVisibility, setButtonVisibility] = useState(false);
+  const [comments, setComments] = useState([1, 2]);
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -22,7 +21,12 @@ export function Post({ author, content, publishedAt }) {
   });
 
   const handleCreateNewComment = () => {
+    event.preventDefault();
     console.log("oi");
+
+    setComments([...comments, comments.length + 1]);
+
+    console.log(comments);
   };
 
   const handleBlur = () => {
@@ -67,7 +71,11 @@ export function Post({ author, content, publishedAt }) {
         ))}
       </div>
 
-      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
+      <form
+        onSubmit={handleCreateNewComment}
+        className={styles.commentForm}
+        aria-label="form"
+      >
         <strong>Deixe seu feedback</strong>
 
         <textarea
