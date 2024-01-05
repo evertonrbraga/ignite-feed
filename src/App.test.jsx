@@ -134,7 +134,7 @@ describe("<App />", () => {
                 class="content"
               >
                 <p>
-                  Fala galeraa 👋
+                  Fala galeraaa 👋
                 </p>
                 <p>
                   Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
@@ -155,6 +155,7 @@ describe("<App />", () => {
                   Deixe seu feedback
                 </strong>
                 <textarea
+                  name="comment"
                   placeholder="Deixe um comentário"
                 />
                 <footer
@@ -259,145 +260,7 @@ describe("<App />", () => {
                         </button>
                       </header>
                       <p>
-                        Muito bom Devon, parabéns!! 👏👏
-                      </p>
-                    </div>
-                    <footer>
-                      <button>
-                        <svg
-                          aria-label="thumbsup-icon"
-                          fill="currentColor"
-                          height="1em"
-                          viewBox="0 0 256 256"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            fill="none"
-                            height="256"
-                            width="256"
-                          />
-                          <path
-                            d="M32,104H80a0,0,0,0,1,0,0V208a0,0,0,0,1,0,0H32a8,8,0,0,1-8-8V112A8,8,0,0,1,32,104Z"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="16"
-                          />
-                          <path
-                            d="M80,104l40-80a32,32,0,0,1,32,32V80h61.9a15.9,15.9,0,0,1,15.8,18l-12,96a16,16,0,0,1-15.8,14H80"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="16"
-                          />
-                        </svg>
-                        Aplaudir 
-                        <span>
-                          20
-                        </span>
-                      </button>
-                    </footer>
-                  </div>
-                </div>
-                <div
-                  aria-label="comment"
-                  class="comment"
-                >
-                  <img
-                    alt="Everton Braga's photo profile in the comment"
-                    class="avatar"
-                    src="https://www.github.com/evertonrbraga.png"
-                  />
-                  <div
-                    class="commentBox"
-                  >
-                    <div
-                      class="commentContent"
-                    >
-                      <header>
-                        <div
-                          class="author"
-                        >
-                          <time
-                            datetime="2022-05-11 08:13:30"
-                            title="11 de Maio às 08:13h"
-                          >
-                            Cerca de 1h atrás
-                          </time>
-                        </div>
-                        <button
-                          title="Deletar comentário"
-                        >
-                          <svg
-                            aria-label="trash-icon"
-                            fill="currentColor"
-                            height="24"
-                            viewBox="0 0 256 256"
-                            width="24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <rect
-                              fill="none"
-                              height="256"
-                              width="256"
-                            />
-                            <line
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                              x1="216"
-                              x2="40"
-                              y1="56"
-                              y2="56"
-                            />
-                            <line
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                              x1="104"
-                              x2="104"
-                              y1="104"
-                              y2="168"
-                            />
-                            <line
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                              x1="152"
-                              x2="152"
-                              y1="104"
-                              y2="168"
-                            />
-                            <path
-                              d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                            />
-                            <path
-                              d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                            />
-                          </svg>
-                        </button>
-                      </header>
-                      <p>
-                        Muito bom Devon, parabéns!! 👏👏
+                        Post muito bacana, hein?!
                       </p>
                     </div>
                     <footer>
@@ -479,7 +342,7 @@ describe("<App />", () => {
                   Fala galeraa 👋
                 </p>
                 <p>
-                  Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
+                  Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
                 </p>
                 <p>
                   <a
@@ -497,6 +360,7 @@ describe("<App />", () => {
                   Deixe seu feedback
                 </strong>
                 <textarea
+                  name="comment"
                   placeholder="Deixe um comentário"
                 />
                 <footer
@@ -601,145 +465,7 @@ describe("<App />", () => {
                         </button>
                       </header>
                       <p>
-                        Muito bom Devon, parabéns!! 👏👏
-                      </p>
-                    </div>
-                    <footer>
-                      <button>
-                        <svg
-                          aria-label="thumbsup-icon"
-                          fill="currentColor"
-                          height="1em"
-                          viewBox="0 0 256 256"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            fill="none"
-                            height="256"
-                            width="256"
-                          />
-                          <path
-                            d="M32,104H80a0,0,0,0,1,0,0V208a0,0,0,0,1,0,0H32a8,8,0,0,1-8-8V112A8,8,0,0,1,32,104Z"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="16"
-                          />
-                          <path
-                            d="M80,104l40-80a32,32,0,0,1,32,32V80h61.9a15.9,15.9,0,0,1,15.8,18l-12,96a16,16,0,0,1-15.8,14H80"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="16"
-                          />
-                        </svg>
-                        Aplaudir 
-                        <span>
-                          20
-                        </span>
-                      </button>
-                    </footer>
-                  </div>
-                </div>
-                <div
-                  aria-label="comment"
-                  class="comment"
-                >
-                  <img
-                    alt="Everton Braga's photo profile in the comment"
-                    class="avatar"
-                    src="https://www.github.com/evertonrbraga.png"
-                  />
-                  <div
-                    class="commentBox"
-                  >
-                    <div
-                      class="commentContent"
-                    >
-                      <header>
-                        <div
-                          class="author"
-                        >
-                          <time
-                            datetime="2022-05-11 08:13:30"
-                            title="11 de Maio às 08:13h"
-                          >
-                            Cerca de 1h atrás
-                          </time>
-                        </div>
-                        <button
-                          title="Deletar comentário"
-                        >
-                          <svg
-                            aria-label="trash-icon"
-                            fill="currentColor"
-                            height="24"
-                            viewBox="0 0 256 256"
-                            width="24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <rect
-                              fill="none"
-                              height="256"
-                              width="256"
-                            />
-                            <line
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                              x1="216"
-                              x2="40"
-                              y1="56"
-                              y2="56"
-                            />
-                            <line
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                              x1="104"
-                              x2="104"
-                              y1="104"
-                              y2="168"
-                            />
-                            <line
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                              x1="152"
-                              x2="152"
-                              y1="104"
-                              y2="168"
-                            />
-                            <path
-                              d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                            />
-                            <path
-                              d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="16"
-                            />
-                          </svg>
-                        </button>
-                      </header>
-                      <p>
-                        Muito bom Devon, parabéns!! 👏👏
+                        Post muito bacana, hein?!
                       </p>
                     </div>
                     <footer>

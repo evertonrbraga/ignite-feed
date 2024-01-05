@@ -7,7 +7,8 @@ import styles from "./Post.module.css";
 
 export function Post({ author, content, publishedAt }) {
   const [buttonVisibility, setButtonVisibility] = useState(false);
-  const [comments, setComments] = useState([1, 2]);
+  const [comments, setComments] = useState(["Post muito bacana, hein?!"]);
+  const [newCommentText, setNewCommentText] = useState("");
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -20,13 +21,14 @@ export function Post({ author, content, publishedAt }) {
     addSuffix: true,
   });
 
-  const handleCreateNewComment = () => {
+  const handleCreateNewComment = (comment) => {
     event.preventDefault();
-    console.log("oi");
+    setComments([...comments, comment]);
+    setNewCommentText("");
+  };
 
-    setComments([...comments, comments.length + 1]);
-
-    console.log(comments);
+  const handleChangeNewCommentText = () => {
+    setNewCommentText(event.target.value);
   };
 
   const handleBlur = () => {
@@ -60,8 +62,8 @@ export function Post({ author, content, publishedAt }) {
       </header>
 
       <div className={styles.content}>
-        {content.map((line, index) => (
-          <p key={`content-${index}`}>
+        {content.map((line) => (
+          <p key={line.content}>
             {line.type === "paragraph" ? (
               line.content
             ) : (
@@ -72,16 +74,19 @@ export function Post({ author, content, publishedAt }) {
       </div>
 
       <form
-        onSubmit={handleCreateNewComment}
+        onSubmit={() => handleCreateNewComment(newCommentText)}
         className={styles.commentForm}
         aria-label="form"
       >
         <strong>Deixe seu feedback</strong>
 
         <textarea
+          name="comment"
+          placeholder="Deixe um comentário"
+          value={newCommentText}
+          onChange={handleChangeNewCommentText}
           onFocus={() => setButtonVisibility(true)}
           onBlur={handleBlur}
-          placeholder="Deixe um comentário"
         />
 
         <footer aria-label="botao-publicar">
@@ -91,7 +96,7 @@ export function Post({ author, content, publishedAt }) {
 
       <div className={styles.commentList}>
         {comments.map((comment) => (
-          <Comment />
+          <Comment key={comment} content={comment} />
         ))}
       </div>
     </article>

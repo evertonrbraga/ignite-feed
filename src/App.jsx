@@ -13,7 +13,7 @@ const posts = [
       role: "Frontend Developer",
     },
     content: [
-      { type: "paragraph", content: "Fala galeraa 👋" },
+      { type: "paragraph", content: "Fala galeraaa 👋" },
       {
         type: "paragraph",
         content:
@@ -35,7 +35,7 @@ const posts = [
       {
         type: "paragraph",
         content:
-          "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
+          "Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
       },
       { type: "link", content: "jane.design/doctorcare" },
     ],

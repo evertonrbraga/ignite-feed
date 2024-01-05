@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { Comment } from "./Comment";
 
 beforeEach(() => {
-  render(<Comment />);
+  render(<Comment content="comment" />);
 });
 
 describe("<Comment />", () => {
@@ -32,7 +32,7 @@ describe("<Comment />", () => {
   });
 
   it("should check if the comment is being displayed on the screen", () => {
-    const comment = screen.getByText(/muito bom devon/i);
+    const comment = screen.getByText("comment");
     expect(comment).toBeInTheDocument();
   });
 

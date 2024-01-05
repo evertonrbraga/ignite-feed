@@ -102,20 +102,19 @@ describe("<Post />", () => {
       { timeout: 150 }
     );
   });
-  it("should verify the form submit", () => {
+  it("should verify if the form submit the value from textarea to create a new comment", () => {
     const textarea = screen.getByPlaceholderText("Deixe um comentário");
     const comments = screen.getAllByLabelText("comment");
 
-    expect(comments).toHaveLength(2);
+    expect(comments).toHaveLength(1);
 
     fireEvent.focus(textarea);
     const button = screen.getByText("Publicar");
     fireEvent.change(textarea, { target: { value: "New comment" } });
     fireEvent.click(button);
+    expect(textarea).toHaveValue("");
 
     const updatedComments = screen.getAllByLabelText("comment");
-    expect(updatedComments).toHaveLength(3);
+    expect(updatedComments).toHaveLength(2);
   });
 });
-
-//testar funcao de submit do form
