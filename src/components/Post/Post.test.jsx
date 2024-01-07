@@ -102,7 +102,24 @@ describe("<Post />", () => {
       { timeout: 150 }
     );
   });
-  it("should verify if the form submit the value from textarea to create a new comment", () => {
+
+  it("should verify if the form submit creates a new comment", () => {
+    const textarea = screen.getByPlaceholderText("Deixe um comentário");
+    const comments = screen.getAllByLabelText("comment");
+
+    expect(comments).toHaveLength(1);
+
+    fireEvent.focus(textarea);
+    const button = screen.getByText("Publicar");
+    fireEvent.change(textarea, { target: { value: "New comment" } });
+    fireEvent.click(button);
+    expect(textarea).toHaveValue("");
+
+    const updatedComments = screen.getAllByLabelText("comment");
+    expect(updatedComments).toHaveLength(2);
+  });
+
+  it("should check if delete functionality is working properly", () => {
     const textarea = screen.getByPlaceholderText("Deixe um comentário");
     const comments = screen.getAllByLabelText("comment");
 

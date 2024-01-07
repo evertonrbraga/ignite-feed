@@ -1,11 +1,13 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Comment } from "./Comment";
 
-beforeEach(() => {
-  render(<Comment content="comment" />);
-});
-
 describe("<Comment />", () => {
+  const onDeleteComment = jest.fn();
+
+  beforeEach(() => {
+    render(<Comment content="comment" onDeleteComment={onDeleteComment} />);
+  });
+
   it("should check if the image renders correctly", () => {
     const img = screen.getByAltText(
       "Everton Braga's photo profile in the comment"
@@ -24,11 +26,13 @@ describe("<Comment />", () => {
     expect(timeElement).toHaveTextContent("Cerca de 1h atrás");
   });
 
-  it("should check if delete functionality is working properly", () => {
+  it("should check if the click on trash icon calls the function", () => {
     const button = screen.getByTitle("Deletar comentário");
     const trashIcon = screen.getByLabelText("trash-icon");
     expect(button).toBeInTheDocument();
     expect(trashIcon).toBeInTheDocument();
+    fireEvent.click(button);
+    expect(onDeleteComment).toHaveBeenCalled();
   });
 
   it("should check if the comment is being displayed on the screen", () => {

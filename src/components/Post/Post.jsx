@@ -5,7 +5,7 @@ import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
 import styles from "./Post.module.css";
 
-export function Post({ author, content, publishedAt }) {
+export const Post = ({ author, content, publishedAt }) => {
   const [buttonVisibility, setButtonVisibility] = useState(false);
   const [comments, setComments] = useState(["Post muito bacana, hein?!"]);
   const [newCommentText, setNewCommentText] = useState("");
@@ -27,8 +27,15 @@ export function Post({ author, content, publishedAt }) {
     setNewCommentText("");
   };
 
-  const handleChangeNewCommentText = () => {
+  const handleNewCommentChange = () => {
     setNewCommentText(event.target.value);
+  };
+
+  const deleteComment = (commentToDelete) => {
+    const commentsWithoutDeletedOne = comments.filter(
+      (comment) => comment !== commentToDelete
+    );
+    setComments(commentsWithoutDeletedOne);
   };
 
   const handleBlur = () => {
@@ -84,7 +91,7 @@ export function Post({ author, content, publishedAt }) {
           name="comment"
           placeholder="Deixe um comentário"
           value={newCommentText}
-          onChange={handleChangeNewCommentText}
+          onChange={handleNewCommentChange}
           onFocus={() => setButtonVisibility(true)}
           onBlur={handleBlur}
         />
@@ -96,9 +103,13 @@ export function Post({ author, content, publishedAt }) {
 
       <div className={styles.commentList}>
         {comments.map((comment) => (
-          <Comment key={comment} content={comment} />
+          <Comment
+            key={comment}
+            content={comment}
+            onDeleteComment={deleteComment}
+          />
         ))}
       </div>
     </article>
   );
-}
+};
