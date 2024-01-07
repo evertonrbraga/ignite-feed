@@ -1,33 +1,26 @@
-import { format, formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale/pt-BR";
 import { useState } from "react";
 import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
+import * as util from "../../utils/utils";
 import styles from "./Post.module.css";
 
 export const Post = ({ author, content, publishedAt }) => {
   const [buttonVisibility, setButtonVisibility] = useState(false);
-  const [comments, setComments] = useState(["Post muito bacana, hein?!"]);
+  const [comments, setComments] = useState(["Comentário feríssimo!"]);
   const [newCommentText, setNewCommentText] = useState("");
 
-  const publishedDateFormatted = format(
-    publishedAt,
-    "d 'de' MMMM 'às' HH:mm'h'",
-    { locale: ptBR }
-  );
+  const publishedDateFormatted = util.publishedDateFormatted(publishedAt);
 
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
-    locale: ptBR,
-    addSuffix: true,
-  });
+  const publishedDateRelativeToNow =
+    util.publishedDateRelativeToNow(publishedAt);
 
-  const handleCreateNewComment = (comment) => {
-    event.preventDefault();
-    setComments([...comments, comment]);
+  const handleCreateNewComment = () => {
+    setComments([...comments, event.target.value]);
     setNewCommentText("");
   };
 
   const handleNewCommentChange = () => {
+    event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
   };
 
@@ -43,6 +36,8 @@ export const Post = ({ author, content, publishedAt }) => {
       setButtonVisibility(false);
     }, 100);
   };
+
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
     <article className={styles.post}>
@@ -81,7 +76,7 @@ export const Post = ({ author, content, publishedAt }) => {
       </div>
 
       <form
-        onSubmit={() => handleCreateNewComment(newCommentText)}
+        onSubmit={handleCreateNewComment}
         className={styles.commentForm}
         aria-label="form"
       >
@@ -94,14 +89,19 @@ export const Post = ({ author, content, publishedAt }) => {
           onChange={handleNewCommentChange}
           onFocus={() => setButtonVisibility(true)}
           onBlur={handleBlur}
+          required
         />
 
         <footer aria-label="botao-publicar">
-          {buttonVisibility ? <button type="submit">Publicar</button> : null}
+          {buttonVisibility ? (
+            <button type="submit" disabled={isNewCommentEmpty}>
+              Publicar
+            </button>
+          ) : null}
         </footer>
       </form>
 
-      <div className={styles.commentList}>
+      <div className={styles.commentList} aria-label="comment-list">
         {comments.map((comment) => (
           <Comment
             key={comment}

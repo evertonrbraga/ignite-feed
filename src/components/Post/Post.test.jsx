@@ -1,7 +1,6 @@
-import { format, formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale/pt-BR";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Post } from "./Post";
+import * as util from "../../utils/utils";
 
 const data = {
   id: 1,
@@ -33,41 +32,40 @@ beforeEach(() => {
 });
 
 describe("<Post />", () => {
-  it("should verify if the .post wrapper are rendering", () => {
+  it("should check if the .post main wrapper are rendering", () => {
     const postWrapper = document.querySelector(".post");
     expect(postWrapper).toBeInTheDocument();
   });
-  it("should verify if the avatar image is rendering", () => {
+
+  it("should check if the avatar image is rendering", () => {
     const avatarImg = screen.getByAltText(
       "Everton Braga's photo profile in the post"
     );
     expect(avatarImg).toBeInTheDocument();
   });
-  it("should verify the authorInfo section", () => {
+
+  it("should check if the authorInfo section is displayed on the screen", () => {
     const author = screen.getByText("Everton Braga");
     const role = screen.getByText("Frontend Developer");
     expect(author).toBeInTheDocument();
     expect(role).toBeInTheDocument();
   });
-  it("should verify the post time", () => {
-    const publishedDateFormatted = format(
-      data.publishedAt,
-      "d 'de' MMMM 'às' HH:mm'h'",
-      {
-        locale: ptBR,
-      }
+
+  it("should check the post time", () => {
+    const publishedDateFormatted = util.publishedDateFormatted(
+      data.publishedAt
     );
-    const publishedDateRelativeToNow = formatDistanceToNow(data.publishedAt, {
-      locale: ptBR,
-      addSuffix: true,
-    });
+    const publishedDateRelativeToNow = util.publishedDateRelativeToNow(
+      data.publishedAt
+    );
     const timeTag = screen.getByTitle(publishedDateFormatted);
     const dateTime = data.publishedAt.toISOString();
     expect(timeTag).toHaveAttribute("title", publishedDateFormatted);
     expect(timeTag).toHaveAttribute("dateTime", dateTime);
     expect(timeTag).toHaveTextContent(publishedDateRelativeToNow);
   });
-  it("should verify the post content", () => {
+
+  it("should check the content section", () => {
     const firstParagraph = screen.getByText("Fala galeraa 👋");
     const secondParagraph = screen.getByText(
       "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀"
@@ -79,22 +77,19 @@ describe("<Post />", () => {
     expect(linkElement).toHaveAttribute("href", "#");
     expect(linkElement).toHaveTextContent(linkText);
   });
-  it("should verify the commentForm section with the logic of button visibility", async () => {
+
+  it("should check the commentForm section with the logic of button visibility", async () => {
     const label = screen.getByText("Deixe seu feedback");
     expect(label).toBeInTheDocument();
-
     const footerButtonSection = screen.getByLabelText("botao-publicar");
     expect(footerButtonSection).toBeEmptyDOMElement();
-
     const textarea = screen.getByPlaceholderText("Deixe um comentário");
     fireEvent.focus(textarea);
     expect(textarea).toHaveValue("");
     fireEvent.change(textarea, { target: { value: "Some text" } });
     expect(textarea).toHaveValue("Some text");
     expect(footerButtonSection).not.toBeEmptyDOMElement();
-
     fireEvent.blur(textarea);
-
     await waitFor(
       () => {
         expect(footerButtonSection).toBeEmptyDOMElement();
@@ -103,35 +98,32 @@ describe("<Post />", () => {
     );
   });
 
-  it("should verify if the form submit creates a new comment", () => {
+  it("should check if the form submit creates a new comment", () => {
     const textarea = screen.getByPlaceholderText("Deixe um comentário");
     const comments = screen.getAllByLabelText("comment");
-
     expect(comments).toHaveLength(1);
-
     fireEvent.focus(textarea);
     const button = screen.getByText("Publicar");
     fireEvent.change(textarea, { target: { value: "New comment" } });
     fireEvent.click(button);
     expect(textarea).toHaveValue("");
-
     const updatedComments = screen.getAllByLabelText("comment");
     expect(updatedComments).toHaveLength(2);
   });
 
-  it("should check if delete functionality is working properly", () => {
+  it("should check if delete comment functionality is working properly", async () => {
+    const commentList = screen.getByLabelText("comment-list");
+    const button = screen.getAllByTitle("Deletar comentário")[0];
+    expect(commentList).not.toBeEmptyDOMElement();
+    expect(button).toBeInTheDocument();
+    fireEvent.click(button);
+    expect(commentList).toBeEmptyDOMElement();
+  });
+
+  it("should check if the publish button is disable if textarea content is empty", () => {
     const textarea = screen.getByPlaceholderText("Deixe um comentário");
-    const comments = screen.getAllByLabelText("comment");
-
-    expect(comments).toHaveLength(1);
-
     fireEvent.focus(textarea);
     const button = screen.getByText("Publicar");
-    fireEvent.change(textarea, { target: { value: "New comment" } });
-    fireEvent.click(button);
-    expect(textarea).toHaveValue("");
-
-    const updatedComments = screen.getAllByLabelText("comment");
-    expect(updatedComments).toHaveLength(2);
+    expect(button).toBeDisabled();
   });
 });

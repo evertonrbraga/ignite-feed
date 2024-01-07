@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import { App } from "./App";
 
 describe("<App />", () => {
-  it("should verify if the wrapper class is rendering correctly", () => {
+  it("should check if the wrapper class is rendering correctly", () => {
     const { container } = render(<App />);
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -127,7 +127,7 @@ describe("<App />", () => {
                   datetime="2023-12-29T23:00:00.000Z"
                   title="29 de dezembro às 20:00h"
                 >
-                  há 7 dias
+                  há 9 dias
                 </time>
               </header>
               <div
@@ -157,12 +157,14 @@ describe("<App />", () => {
                 <textarea
                   name="comment"
                   placeholder="Deixe um comentário"
+                  required=""
                 />
                 <footer
                   aria-label="botao-publicar"
                 />
               </form>
               <div
+                aria-label="comment-list"
                 class="commentList"
               >
                 <div
@@ -260,7 +262,7 @@ describe("<App />", () => {
                         </button>
                       </header>
                       <p>
-                        Post muito bacana, hein?!
+                        Comentário feríssimo!
                       </p>
                     </div>
                     <footer>
@@ -332,7 +334,7 @@ describe("<App />", () => {
                   datetime="2023-12-31T23:00:00.000Z"
                   title="31 de dezembro às 20:00h"
                 >
-                  há 5 dias
+                  há 7 dias
                 </time>
               </header>
               <div
@@ -362,12 +364,14 @@ describe("<App />", () => {
                 <textarea
                   name="comment"
                   placeholder="Deixe um comentário"
+                  required=""
                 />
                 <footer
                   aria-label="botao-publicar"
                 />
               </form>
               <div
+                aria-label="comment-list"
                 class="commentList"
               >
                 <div
@@ -465,7 +469,7 @@ describe("<App />", () => {
                         </button>
                       </header>
                       <p>
-                        Post muito bacana, hein?!
+                        Comentário feríssimo!
                       </p>
                     </div>
                     <footer>

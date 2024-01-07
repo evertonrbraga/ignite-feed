@@ -32,7 +32,7 @@ describe("<Comment />", () => {
     expect(button).toBeInTheDocument();
     expect(trashIcon).toBeInTheDocument();
     fireEvent.click(button);
-    expect(onDeleteComment).toHaveBeenCalled();
+    expect(onDeleteComment).toHaveBeenCalledWith("comment");
   });
 
   it("should check if the comment is being displayed on the screen", () => {
