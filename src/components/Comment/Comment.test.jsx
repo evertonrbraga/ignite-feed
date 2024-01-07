@@ -40,11 +40,13 @@ describe("<Comment />", () => {
     expect(comment).toBeInTheDocument();
   });
 
-  it("should check if the thumbs up functionality is working properly", () => {
+  it("should check if the like feature is working properly", () => {
     const button = screen.getByText("Aplaudir");
     const thumbsupIcon = screen.getByLabelText("thumbsup-icon");
     expect(button).toHaveTextContent("Aplaudir");
-    expect(button).toHaveTextContent("20");
+    expect(button).toHaveTextContent("0");
     expect(thumbsupIcon).toBeInTheDocument();
+    fireEvent.click(button);
+    expect(button).toHaveTextContent("1");
   });
 });

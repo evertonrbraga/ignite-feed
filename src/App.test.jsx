@@ -299,7 +299,7 @@ describe("<App />", () => {
                         </svg>
                         Aplaudir 
                         <span>
-                          20
+                          0
                         </span>
                       </button>
                     </footer>
@@ -506,7 +506,7 @@ describe("<App />", () => {
                         </svg>
                         Aplaudir 
                         <span>
-                          20
+                          0
                         </span>
                       </button>
                     </footer>

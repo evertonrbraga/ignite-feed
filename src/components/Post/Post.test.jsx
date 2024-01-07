@@ -111,7 +111,7 @@ describe("<Post />", () => {
     expect(updatedComments).toHaveLength(2);
   });
 
-  it("should check if delete comment functionality is working properly", async () => {
+  it("should check if delete comment feature is working properly", async () => {
     const commentList = screen.getByLabelText("comment-list");
     const button = screen.getAllByTitle("Deletar comentário")[0];
     expect(commentList).not.toBeEmptyDOMElement();
@@ -120,7 +120,7 @@ describe("<Post />", () => {
     expect(commentList).toBeEmptyDOMElement();
   });
 
-  it("should check if the publish button is disable if textarea content is empty", () => {
+  it("should check if the publish button click is disabled if textarea content is empty", () => {
     const textarea = screen.getByPlaceholderText("Deixe um comentário");
     fireEvent.focus(textarea);
     const button = screen.getByText("Publicar");
