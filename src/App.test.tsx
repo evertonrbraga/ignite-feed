@@ -127,7 +127,7 @@ describe("<App />", () => {
                   datetime="2023-12-29T23:00:00.000Z"
                   title="29 de dezembro às 20:00h"
                 >
-                  há 9 dias
+                  há cerca de 2 meses
                 </time>
               </header>
               <div
@@ -334,7 +334,7 @@ describe("<App />", () => {
                   datetime="2023-12-31T23:00:00.000Z"
                   title="31 de dezembro às 20:00h"
                 >
-                  há 7 dias
+                  há cerca de 2 meses
                 </time>
               </header>
               <div

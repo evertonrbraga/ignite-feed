@@ -1,30 +1,54 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
 import * as util from "../../utils/utils";
 import styles from "./Post.module.css";
 
-export const Post = ({ author, content, publishedAt }) => {
+interface Author {
+  avatarUrl: string;
+  name: string;
+  role: string;
+}
+
+interface Content {
+  type: "paragraph" | "link";
+  content: string;
+}
+
+export interface PostType {
+  id: number;
+  author: Author;
+  content: Content[];
+  publishedAt: Date;
+}
+
+interface PostProps {
+  post: PostType;
+}
+
+export const Post = ({ post }: PostProps) => {
   const [buttonVisibility, setButtonVisibility] = useState(false);
   const [comments, setComments] = useState(["Comentário feríssimo!"]);
   const [newCommentText, setNewCommentText] = useState("");
 
-  const publishedDateFormatted = util.publishedDateFormatted(publishedAt);
+  const publishedDateFormatted = util.publishedDateFormatted(post.publishedAt);
 
-  const publishedDateRelativeToNow =
-    util.publishedDateRelativeToNow(publishedAt);
+  const publishedDateRelativeToNow = util.publishedDateRelativeToNow(
+    post.publishedAt
+  );
 
-  const handleCreateNewComment = () => {
-    setComments([...comments, event.target.value]);
+  const handleCreateNewComment = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setComments([...comments, newCommentText]);
     setNewCommentText("");
   };
 
-  const handleNewCommentChange = () => {
+  const handleNewCommentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
   };
 
-  const deleteComment = (commentToDelete) => {
+  const deleteComment = (commentToDelete: string) => {
     const commentsWithoutDeletedOne = comments.filter(
       (comment) => comment !== commentToDelete
     );
@@ -44,27 +68,27 @@ export const Post = ({ author, content, publishedAt }) => {
       <header>
         <div className={styles.author}>
           <Avatar
-            src={author.avatarUrl}
+            src={post.author.avatarUrl}
             alt="Everton Braga's photo profile in the post"
             hasBorder
           />
 
           <div className={styles.authorInfo}>
-            <strong>{author.name}</strong>
-            <span>{author.role}</span>
+            <strong>{post.author.name}</strong>
+            <span>{post.author.role}</span>
           </div>
         </div>
 
         <time
           title={publishedDateFormatted}
-          dateTime={publishedAt.toISOString()}
+          dateTime={post.publishedAt.toISOString()}
         >
           {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={styles.content}>
-        {content.map((line) => (
+        {post.content.map((line) => (
           <p key={line.content}>
             {line.type === "paragraph" ? (
               line.content

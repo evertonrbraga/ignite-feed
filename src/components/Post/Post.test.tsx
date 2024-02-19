@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { Post } from "./Post";
+import { Post, PostType } from "./Post";
 import * as util from "../../utils/utils";
 
-const data = {
+const post: PostType = {
   id: 1,
   author: {
     avatarUrl: "https://www.github.com/evertonrbraga.png",
@@ -22,13 +22,7 @@ const data = {
 };
 
 beforeEach(() => {
-  render(
-    <Post
-      author={data.author}
-      content={data.content}
-      publishedAt={data.publishedAt}
-    />
-  );
+  render(<Post post={post} />);
 });
 
 describe("<Post />", () => {
@@ -53,13 +47,13 @@ describe("<Post />", () => {
 
   it("should check the post time", () => {
     const publishedDateFormatted = util.publishedDateFormatted(
-      data.publishedAt
+      post.publishedAt
     );
     const publishedDateRelativeToNow = util.publishedDateRelativeToNow(
-      data.publishedAt
+      post.publishedAt
     );
     const timeTag = screen.getByTitle(publishedDateFormatted);
-    const dateTime = data.publishedAt.toISOString();
+    const dateTime = post.publishedAt.toISOString();
     expect(timeTag).toHaveAttribute("title", publishedDateFormatted);
     expect(timeTag).toHaveAttribute("dateTime", dateTime);
     expect(timeTag).toHaveTextContent(publishedDateRelativeToNow);
